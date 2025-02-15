@@ -2,5 +2,6 @@ tags
 test.sh
 .luarc.json
 nvim
-
+lua/vexy/deprecated/colors_test.py
+lua/vexy/deprecated/dump_keymaps.lua
 spell/
