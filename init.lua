@@ -1,6 +1,3 @@
-require 'vexy.keybinds'
-require 'vexy.opts'
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -17,6 +14,46 @@ require('lazy').setup({
 
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'catppuccin/nvim', -- theme
+  'koalaman/shellcheck', -- Bash linter
+  'mvllow/modes.nvim', -- Highlight mode colors
+  'tamton-aquib/staline.nvim', -- Status Line
+  {
+    'm4xshen/smartcolumn.nvim',
+    opts = {
+      colorcolumn = '80',
+      disabled_filetypes = {
+        'help',
+        'text',
+        'markdown',
+        'lua',
+      },
+    },
+  },
+  {
+    'utilyre/barbecue.nvim', -- Breadcrumbs
+    name = 'barbecue',
+    version = '*',
+    dependencies = {
+      'SmiteshP/nvim-navic',
+      'nvim-tree/nvim-web-devicons', -- optional dependency
+    },
+  },
+  {
+    'catgoose/nvim-colorizer.lua',
+    event = 'BufReadPre',
+    opts = { -- set to setup table
+      user_default_options = {
+        names = false,
+        names_opts = {
+          lowercase = false,
+          camelcase = false,
+          uppercase = false,
+          strip_digits = false,
+        },
+      },
+      mode = 'foreground',
+    },
+  },
 
   {
     'stevearc/oil.nvim',
@@ -366,9 +403,8 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
-
+        ts_ls = {},
+        shellcheck = {},
         pyright = {},
         lua_ls = {
           -- cmd = { ... },
@@ -584,18 +620,19 @@ require('lazy').setup({
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
-
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
-
+      -- STATUSLINE STARTS HERE:
+      -- local statusline = require 'mini.statusline'
+      -- -- set use_icons to true if you have a Nerd Font
+      -- statusline.setup { use_icons = vim.g.have_nerd_font }
+      --
+      -- -- You can configure sections in the statusline by overriding their
+      -- -- default behavior. For example, here we set the section for
+      -- -- cursor location to LINE:COLUMN
+      -- ---@diagnostic disable-next-line: duplicate-set-field
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
+      -- STATUSLINE ENDS HERE
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
@@ -665,59 +702,10 @@ require('lazy').setup({
   },
 })
 
--- CUSTOM THEME
-require('catppuccin').setup {
-  flavour = 'mocha', -- latte, frappe, macchiato, mocha
-  background = { -- :h background
-    light = 'latte',
-    dark = 'mocha',
-  },
-  transparent_background = true, -- disables setting the background color.
-  show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-  term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
-  dim_inactive = {
-    enabled = false, -- dims the background color of inactive window
-    shade = 'dark',
-    percentage = 0.15, -- percentage of the shade to apply to the inactive window
-  },
-  no_italic = false, -- Force no italic
-  no_bold = false, -- Force no bold
-  no_underline = false, -- Force no underline
-  styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-    comments = { 'italic' }, -- Change the style of comments
-    conditionals = { 'italic' },
-    loops = {},
-    functions = {},
-    keywords = {},
-    strings = {},
-    variables = {},
-    numbers = {},
-    booleans = {},
-    properties = {},
-    types = {},
-    operators = {},
-    -- miscs = {}, -- Uncomment to turn off hard-coded styles
-  },
-  color_overrides = {},
-  custom_highlights = {},
-  default_integrations = true,
-  integrations = {
-    cmp = true,
-    gitsigns = true,
-    nvimtree = true,
-    treesitter = true,
-    notify = false,
-    mini = {
-      enabled = true,
-      indentscope_color = '',
-    },
-    -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-  },
-}
-
--- setup must be called before loading
-vim.cmd.colorscheme 'catppuccin'
-
+require 'vexy.keybinds'
+require 'vexy.opts'
+require 'custom.plugins.init'
+require 'vexy.theme'
 -- The line beneath this is called `modeline`. See `:help modeline`
 --
 -- vim: ts=2 sts=2 sw=2 et

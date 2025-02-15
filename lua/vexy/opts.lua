@@ -10,8 +10,6 @@ vim.opt.showmode = false
 vim.opt.breakindent = true
 -- Save undo history
 vim.opt.undofile = true
--- Stop making long functions
-vim.opt.colorcolumn = '80'
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -33,7 +31,7 @@ vim.opt.listchars = { tab = '  ', trail = ' ', nbsp = '␣' }
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 20
+vim.opt.scrolloff = 10
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
@@ -47,6 +45,7 @@ vim.api.nvim_create_autocmd('BufEnter', { -- Line Numbers
     vim.opt.relativenumber = true
     vim.opt.numberwidth = 7
     vim.opt.statuscolumn = '%=%{v:relnum?v:relnum:v:lnum} │ '
+    vim.opt.fillchars:append { eob = ' ' }
   end,
 })
 
