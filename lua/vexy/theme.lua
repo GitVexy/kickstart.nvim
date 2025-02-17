@@ -80,7 +80,7 @@ vim.cmd.colorscheme 'catppuccin'
 
 require('modes').setup {
   colors = {
-    insert = '#cc8700',
+    insert = '#ffba4e',
     visual = '#007359',
     delete = '#ff0000',
     copy = '#52c3cc',
@@ -101,13 +101,13 @@ require('staline').setup {
     cool_symbol = '',
     branch_symbol = ': ',
     true_colors = true,
-    fg = '#cc8700',
+    fg = '#ffba4e',
     bg = 'none',
     inactive_bgcolor = 'none',
   },
   sections = {
-    left = { 'branch', 'lsp_name', ': ', 'lsp' },
-    mid = { 'file_name', '%=', 'file_size' },
+    left = { 'branch', '{ ', 'lsp', '}' },
+    mid = { 'file_name', 'file_size' },
     right = { '-line_column' },
   },
   mode_colors = {
