@@ -3,6 +3,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+---------------------------------------------------------------- Functionality
+
 --------------------------------------------------------------- Leader keymaps
 vim.keymap.set('n', '<leader>py', ':!python3 %<CR>', {
   desc = 'Run python file',
@@ -33,6 +35,14 @@ vim.keymap.set('n', '<M-Left>', '<C-W>h')
 vim.keymap.set('n', '<M-Down>', '<C-W>j')
 vim.keymap.set('n', '<M-Up>', '<C-W>k')
 vim.keymap.set('n', '<M-Right>', '<C-W>l')
+
+vim.keymap.set('i', '<C-a>', '<Esc>:%y<CR>', {
+  desc = 'Copy all insert mode',
+}) -- 22.02.2025
+
+vim.keymap.set('n', '<C-a>', ':%y<CR>', {
+  desc = 'Copy all normal mode',
+}) -- 22.02.2025
 
 vim.keymap.set('n', '<C-Right>', ':vne<CR>', {
   desc = 'Split right',
